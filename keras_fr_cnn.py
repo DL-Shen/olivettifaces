@@ -1,6 +1,6 @@
 #coding:utf-8
 #python -m pip install h5py
-from __future__ import print_function  
+# from __future__ import print_function
 import numpy as np
 np.random.seed(1337)  # for reproducibility
   
@@ -27,7 +27,8 @@ nb_filters1, nb_filters2 = 5, 10  # 卷积核的数目（即输出的维度）
 nb_pool = 2  
 # convolution kernel size  
 nb_conv = 3  # 单个整数或由两个整数构成的list/tuple，卷积核的宽度和长度。如为单个整数，则表示在各个空间维度的相同长度。
-  
+
+
 def load_data(dataset_path):  
     img = Image.open(dataset_path)  
     img_ndarray = np.asarray(img, dtype = 'float64') / 255  # asarray，将数据转化为np.ndarray，但使用原内存
@@ -65,7 +66,8 @@ def load_data(dataset_path):
        
     rval = [(train_data, train_label), (valid_data, valid_label), (test_data, test_label)]  
     return rval  
-  
+
+
 def set_model(lr=0.005,decay=1e-6,momentum=0.9): 
     model = Sequential()
     if K.image_data_format() == 'channels_first':
@@ -87,18 +89,21 @@ def set_model(lr=0.005,decay=1e-6,momentum=0.9):
     sgd = SGD(lr=lr, decay=decay, momentum=momentum, nesterov=True)  
     model.compile(loss='categorical_crossentropy', optimizer=sgd)  
     return model  
-  
+
+
 def train_model(model,X_train, Y_train, X_val, Y_val):  
     model.fit(X_train, Y_train, batch_size = batch_size, epochs = epochs,  
           verbose=1, validation_data=(X_val, Y_val))  
     model.save_weights('model_weights.h5', overwrite=True)  
     return model  
-  
+
+
 def test_model(model,X,Y):  
     model.load_weights('model_weights.h5')  
     score = model.evaluate(X, Y, verbose=0)
     return score  
-  
+
+
 if __name__ == '__main__':  
     # the data, shuffled and split between tran and test sets  
     (X_train, y_train), (X_val, y_val),(X_test, y_test) = load_data('olivettifaces.gif')  
