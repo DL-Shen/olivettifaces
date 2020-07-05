@@ -13,13 +13,6 @@ from keras.optimizers import SGD
 from keras.utils import np_utils
 from keras import backend as K
 
-'''
-Olivetti Faces是纽约大学的一个比较小的人脸库，
-由40个人的400张图片构成，即每个人的人脸图片为10张。
-每张图片的灰度级为8位，每个像素的灰度大小位于0-255之间。
-整张图片大小是1190 × 942，一共有20 × 20张照片。
-那么每张照片的大小就是（1190 / 20）× （942 / 20）= 57 × 47 。
-'''
 
 # There are 40 different classes  
 nb_classes = 40  # 40个类别
