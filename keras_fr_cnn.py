@@ -16,7 +16,7 @@ from keras import backend as K
 
 # There are 40 different classes  
 nb_classes = 40  # 40个类别
-epochs = 40  # 进行40轮次训
+epochs = 4  # 进行40轮次训
 batch_size = 40  # 每次迭代训练使用40个样本
   
 # input image dimensions  
@@ -75,13 +75,13 @@ def set_model(lr=0.005,decay=1e-6,momentum=0.9):
     else:
         model.add(Conv2D(5, kernel_size=(3, 3), input_shape = (img_rows, img_cols, 1)))
     model.add(Activation('tanh'))
-    #model.add(MaxPooling2D(pool_size=(2, 2)))  
+    #model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Conv2D(10, kernel_size=(3, 3)))  
     model.add(Activation('tanh'))  
-    #model.add(MaxPooling2D(pool_size=(2, 2)))  
+    #model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))  
     model.add(Flatten())      
-    model.add(Dense(1000)) #Full connection  
+    model.add(Dense(1000)) #Full connection
     model.add(Activation('tanh')) 
     model.add(Dropout(0.5))  
     model.add(Dense(nb_classes))  
@@ -94,7 +94,8 @@ def set_model(lr=0.005,decay=1e-6,momentum=0.9):
 def train_model(model,X_train, Y_train, X_val, Y_val):  
     model.fit(X_train, Y_train, batch_size = batch_size, epochs = epochs,  
           verbose=1, validation_data=(X_val, Y_val))  
-    model.save_weights('model_weights.h5', overwrite=True)  
+    model.save_weights('model_weights.h5', overwrite=True)
+    model.save('model.h5')
     return model  
 
 
